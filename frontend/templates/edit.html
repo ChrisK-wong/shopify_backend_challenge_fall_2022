@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<div class="edit_form">
+    <h1>Edit item</h1>
+
+    <div class="form">
+        <form action="" method="POST">
+            <label>id: {{item.id}}</label>
+            <div>
+                <label>name:</label>
+                <input type="text" name="name" value="{{item.name}}" required>
+            </div>
+            <div>
+                <label>quantity:</label>
+                <input type="text" name="quantity" value="{{item.quantity}}" required>
+            </div>
+            <input type="submit" value="Updatet">
+        </form>
+    </div>
+</div>
+{% endblock %}

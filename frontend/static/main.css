@@ -1,0 +1,49 @@
+
+.inventory {
+    margin: 0 auto;
+    width: 70vw;
+    margin-bottom: 20vh;
+}
+
+#response {
+    color: red;
+}
+
+.form {
+    padding: 10px;
+}
+
+a:visited {
+    color: blue;
+}
+
+table, td, th {
+    border: 1px solid;
+    padding: 10px;
+    border-collapse: collapse
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    padding: 10px;
+}
+
+td {
+    text-align: center;
+    padding: 10px;
+}
+
+h2 {
+    margin-top: 60px;
+}
+
+.shipping_items th {
+    padding: 1px;
+}
+
+.shipping_items td {
+    padding: 1px;
+}

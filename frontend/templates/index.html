@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="inventory">
+    <div id="response">{{ response }}</div>
+    <h1>Inventory</h1>
+
+    <div class="form">
+        <form action="create" method="POST">
+            <label>name:</label>
+            <input type="text" name="name" required>
+            <label>quantity:</label>
+            <input type="text" name="quantity" required>
+            <input type="submit" value="Create item">
+        </form>
+    </div>
+
+    <table>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>quantity</th>
+            <th>actions</th>
+        </tr>
+        {% for item in inventory %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>
+                    <a href="{{item.id}}/edit">Edit</a>
+                    <br>
+                    <a href="{{item.id}}/delete">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Shipments</h2>
+    <div class="form">
+        <form action="shipment/create" method="POST">
+            <label>description:</label>
+            <input type="text" name="description" required>
+            <label>address:</label>
+            <input type="text" name="address" required>
+            <input type="submit" value="Create shipment">
+        </form>
+    </div>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>description</th>
+            <th>address</th>
+            <th>items</th>
+            <th>actions</th>
+        </tr>
+        {% for sd in shipments %}
+            <tr>
+                <td>{{ sd.id }}</td>
+                <td>{{ sd.description }}</td>
+                <td>{{ sd.address }}</td>
+                <td>
+                    <div class="form">
+                        <form action="shipment/{{sd.id}}/add" method="POST">
+                            <label>item_id:</label>
+                            <input type="text" name="item_id" required>
+                            <label>quantity:</label>
+                            <input type="text" name="quantity" required>
+                            <input type="submit" value="Add item">
+                        </form>
+                    </div>
+                    <table class="shipping_items">
+                        {% if sd['items'] %}
+                        <tr>
+                            <th>item_id</th>
+                            <th>name</th>
+                            <th>quantity</th>
+                            <th>actions</th>
+                        </tr>
+                        {% endif %}
+                            {% for item in sd['items'] %}
+                                <tr>
+                                    <td>{{ item.item_id }}</td>
+                                    <td>{{ item.name }}</td>
+                                    <td>{{ item.quantity }}</td>
+                                    <td>
+                                        <a href="shipment/{{sd.id}}/{{item.item_id}}/remove">Remove</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                    </table>
+                </td>
+                <td>
+                    <a href="shipment/{{sd.id}}/edit">Edit</a>
+                    <br>
+                    <a href="shipment/{{sd.id}}/delete">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
