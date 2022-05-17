@@ -1,4 +1,7 @@
 .idea/
- __pycache__
- *.pyc
- *Db.*
+__pycache__
+*.pyc
+*Db.*
+api/__pycache__/
+api/inventory.db
+frontend/__pycache__/
