@@ -38,11 +38,13 @@ Requires Python 3.6
 ## Using the API
 The API receives and returns JSON data. JSON data is required for `POST` and `PUT` requests. This is done by setting ```"Content-Type: application/json"``` in the header of the request with the JSON data in the body of the request.
 
-|Endpoint|HTTP VERB|Result|Request Body|
-|--------|---------|------|------------|
-| /api/items | GET | Returns all inventory items in the database | |
-| /api/items/create | POST | Adds a new inventory item into database | |
-| /api/items/:id | GET | Returns data of an inventory item | |
-| /api/items/:id/update | PUT | Updates an inventory item's data | |
-| /api/items/:id | DELETE | Deletes an inventory item from the database | |
+
+### Inventory Items
+|Endpoint|HTTP VERB|Result|Sample Request Body|Sample Response|
+|--------|---------|------|-------------------|---------------|
+| /api/items | GET | Returns all inventory items in the database | | <pre lang="json">[&#13;  {&#13;    "id": 1,&#13;    "name": "Pen",&#13;    "quantity": 40&#13;  },&#13;  {&#13;    "id": 2,&#13;    "name": "Notebook",&#13;    "quantity": 15&#13;  }&#13;]</prev>
+| /api/items | POST | Adds a new inventory item into database | <pre lang="json">{&#13;  "name": "Pen",&#13;  "quantity": 40&#13;}</pre> | <pre lang="json">{&#13;  "success": "true"&#13;}</pre> |
+| /api/items/:id | GET | Returns data of an inventory item | | <pre lang="json">{&#13;  "id": 1,&#13;  "name": "Pen",&#13;  "quantity": 40&#13;}</pre> |
+| /api/items/:id/update | PUT | Updates an inventory item's data | <pre lang="json">{&#13;  "name": "Pencil",&#13;  "quantity": 20&#13;}</pre> | <pre lang="json">{&#13;  "success": "true"&#13;}</pre> |
+| /api/items/:id | DELETE | Deletes an inventory item from the database | | <pre lang="json">{&#13;  "success": "true"&#13;}</pre> |
 
