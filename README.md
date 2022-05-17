@@ -6,7 +6,7 @@ A REST API that allows the creation of inventory items that can be assigned to s
 
 ## Getting Started
 
-Requires Python 3.6
+Requires Python 3.6+
 
 - Clone respository
   ```
@@ -51,7 +51,7 @@ The `/api/items` route is used to make CRUD requests for items. Items are stored
 
 ### Shipments
 The `/api/shipments` route is used to make CRUD requests for shipments. Shipments are stored in a table with columns: `id`, `description` and `address`.
-Items from inventory can also be stored into shipments and this information is stored in a many-to-many association table with the columns `id`, `ship_id`, `item_id`, and `quantity`.
+Items from inventory can also be stored into shipments and this information is stored in a many-to-many association table with the columns `id`, `ship_id`, `item_id`, and `quantity`. Addition and removal of items in a shipment will also change the quantity of the item in the inventory appropriately.
 |Endpoint|HTTP VERB|Result|Sample Request Body|Sample Response|
 |--------|---------|------|-------------------|---------------|
 | /api/shipments | GET | Returns all shipments in the database | | <pre lang="json">[&#13;  {&#13;    "address": "123 Class Ave...USA",&#13;    "description": "School Supplies",&#13;    "id": 1,&#13;    "items": [&#13;      {&#13;        "item_id": 2,&#13;        "name": "Notebook",&#13;        "quantity": 10&#13;      },&#13;      {&#13;        "item_id": 4,&#13;        "name": "100 x Paper",&#13;        "quantity": 30&#13;      }&#13;    ]&#13;  },&#13;  {&#13;    "address": "321 Joe Street...USA",&#13;    "description": "Trader Joes",&#13;    "id": 2,&#13;    "items": [&#13;      {&#13;        "item_id": 3,&#13;        "name": "Apple",&#13;        "quantity": 12&#13;      }&#13;    ]&#13;  }&#13;]</prev> |
