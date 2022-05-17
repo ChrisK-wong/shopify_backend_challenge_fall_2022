@@ -50,7 +50,7 @@ def edit(id):
 @web.route('<int:id>/delete', methods=['GET'])
 def delete(id):
     response = requests.delete(url_for('api/items.delete', id=id, _external=True))
-    return redirect('/web')
+    return redir(response)
 
 
 @web.route('shipment', methods=['POST'])
