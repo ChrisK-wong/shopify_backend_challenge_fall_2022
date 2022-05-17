@@ -31,8 +31,8 @@ Requires Python 3.6
   ```
   To run without the frontend, remove these lines from run.py
   ```
-  from frontend.web import web
-  app.register_blueprint(web)
+  from frontend import create_webapp
+  create_webapp(app)
   ```
 
 ## Using the API
@@ -56,6 +56,6 @@ The API receives and returns JSON data. JSON data is required for `POST` and `PU
 | /api/shipments/:id | GET | Returns data of a shipment | | <pre lang="json">{&#13;  "description": "School Supplies",&#13;  "address": "123 Class Ave...USA"&#13;  "id": 1&#13;}</pre> | <pre lang="json">{&#13;  "success": "true"&#13;}
 | /api/shipments/:id/update | PUT | Updates a shipment's data | <pre lang="json">{&#13;  "description": "School Stuff",&#13;  "address": "124 Class Ave...USA"&#13;} | <pre lang="json">{&#13;  "success": "true"&#13;}</pre> |
 | /api/shipments/:id/delete | DELETE | Deletes a shipment from database | | <pre lang="json">{&#13;  "success": "true"&#13;}</pre> |
-| /api/shipments/:id/add | POST | Adds an item to shipment | <pre lang="json">{&#13;  "item_id": "1",&#13;  "quantity": 30&#13;}</pre> | <pre lang="json">{&#13;  "success": "true"&#13;}</pre> |
+| /api/shipments/:id/add | POST | Adds an item to shipment | <pre lang="json">{&#13;  "item_id": 1,&#13;  "quantity": 30&#13;}</pre> | <pre lang="json">{&#13;  "success": "true"&#13;}</pre> |
 | /api/shipments/:id/:item_id/remove | DELETE | Removes an item from shipment | | <pre lang="json">{&#13;  "success": "true"&#13;}</pre> |
 
