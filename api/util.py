@@ -1,4 +1,8 @@
 def view_item(item):
+    """
+    :param item: query objet
+    :return: dict
+    """
     data = {
         'id': item.id,
         'name': item.name,
@@ -8,6 +12,10 @@ def view_item(item):
 
 
 def view_shipment(shipment):
+    """
+    :param shipment: query object
+    :return: dict
+    """
     items = []
     for ship_item in shipment.items:
         item_data = {
