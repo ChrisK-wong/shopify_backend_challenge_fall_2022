@@ -40,6 +40,7 @@ The API receives and returns JSON data. JSON data is required for `POST` and `PU
 
 
 ### Inventory Items
+The `/api/items` route is used to make CRUD requests for items. Items are stored in a table with columns: `id`, `name`, and `quantity`.
 |Endpoint|HTTP VERB|Result|Sample Request Body|Sample Response|
 |--------|---------|------|-------------------|---------------|
 | /api/items | GET | Returns all inventory items in the database | | <pre lang="json">[&#13;  {&#13;    "id": 1,&#13;    "name": "Pen",&#13;    "quantity": 40&#13;  },&#13;  {&#13;    "id": 2,&#13;    "name": "Notebook",&#13;    "quantity": 15&#13;  }&#13;]</prev>
@@ -49,11 +50,13 @@ The API receives and returns JSON data. JSON data is required for `POST` and `PU
 | /api/items/:id | DELETE | Deletes an inventory item from database | | <pre lang="json">{&#13;  "success": "true"&#13;}</pre> |
 
 ### Shipments
+The `/api/shipments` route is used to make CRUD requests for shipments. Shipments are stored in a table with columns: `id`, `description` and `address`.
+Items from inventory can also be stored into shipments and this information is stored in a many-to-many association table with the columns `id`, `ship_id`, `item_id`, and `quantity`.
 |Endpoint|HTTP VERB|Result|Sample Request Body|Sample Response|
 |--------|---------|------|-------------------|---------------|
 | /api/shipments | GET | Returns all shipments in the database | | <pre lang="json">[&#13;  {&#13;    "address": "123 Class Ave...USA",&#13;    "description": "School Supplies",&#13;    "id": 1,&#13;    "items": [&#13;      {&#13;        "item_id": 2,&#13;        "name": "Notebook",&#13;        "quantity": 10&#13;      },&#13;      {&#13;        "item_id": 4,&#13;        "name": "100 x Paper",&#13;        "quantity": 30&#13;      }&#13;    ]&#13;  },&#13;  {&#13;    "address": "321 Joe Street...USA",&#13;    "description": "Trader Joes",&#13;    "id": 2,&#13;    "items": [&#13;      {&#13;        "item_id": 3,&#13;        "name": "Apple",&#13;        "quantity": 12&#13;      }&#13;    ]&#13;  }&#13;]</prev> |
 | /api/shipments | POST | Adds a new shipment into database | <pre lang="json">{&#13;  "description": "School Supplies",&#13;  "address": "123 Class Ave...USA"&#13;}</pre> | <pre lang="json">{&#13;  "success": "true"&#13;}</pre> |
-| /api/shipments/:id | GET | Returns data of a shipment | | <pre lang="json">{&#13;  "description": "Trader Joes",&#13;  "address": "321 Joe Street...USA"&#13;  "id": 2&#13;  "items": [&#13;    {&#13;      "item_id": 3,&#13;      "name": "Apple",&#13;      "quantity": 12&#13;    }&#13;  ]&#13;}</pre> | <pre lang="json">{&#13;  "success": "true"&#13;}
+| /api/shipments/:id | GET | Returns data of a shipment | | <pre lang="json">{&#13;  "description": "Trader Joes",&#13;  "address": "321 Joe Street...USA",&#13;  "id": 2,&#13;  "items": [&#13;    {&#13;      "item_id": 3,&#13;      "name": "Apple",&#13;      "quantity": 12&#13;    }&#13;  ]&#13;}</pre> | <pre lang="json">{&#13;  "success": "true"&#13;}
 | /api/shipments/:id/update | PUT | Updates a shipment's data | <pre lang="json">{&#13;  "description": "School Stuff",&#13;  "address": "124 Class Ave...USA"&#13;} | <pre lang="json">{&#13;  "success": "true"&#13;}</pre> |
 | /api/shipments/:id/delete | DELETE | Deletes a shipment from database | | <pre lang="json">{&#13;  "success": "true"&#13;}</pre> |
 | /api/shipments/:id/add | POST | Adds an item to shipment | <pre lang="json">{&#13;  "item_id": 1,&#13;  "quantity": 30&#13;}</pre> | <pre lang="json">{&#13;  "success": "true"&#13;}</pre> |
