@@ -20,7 +20,7 @@ def read(id=''):
         return jsonify(result)
 
 
-@shipment.route('/create', methods=['POST'])
+@shipment.route('/', methods=['POST'])
 def create():
     data = request.get_json()
     ship_desc = data.get('description')

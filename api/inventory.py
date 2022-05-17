@@ -19,7 +19,7 @@ def read(id=''):
         return jsonify(result)
 
 
-@items.route('/create', methods=['POST'])
+@items.route('/', methods=['POST'])
 def create():
     data = request.get_json()
     item_name = data.get('name')

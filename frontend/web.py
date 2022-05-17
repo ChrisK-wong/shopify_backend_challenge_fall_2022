@@ -18,7 +18,7 @@ def index():
     return render_template('index.html', inventory=items, shipments=shipments, response=response)
 
 
-@web.route('/create', methods=['POST'])
+@web.route('/', methods=['POST'])
 def create():
     item_name = request.form.get('name', '')
     item_quantity = request.form.get('quantity', 0)
@@ -53,7 +53,7 @@ def delete(id):
     return redirect('/web')
 
 
-@web.route('shipment/create', methods=['POST'])
+@web.route('shipment', methods=['POST'])
 def create_shipment():
     ship_desc = request.form.get('description')
     ship_addr = request.form.get('address')
