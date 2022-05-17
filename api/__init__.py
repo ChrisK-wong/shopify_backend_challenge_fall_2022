@@ -9,8 +9,8 @@ def create_app():
     from .inventory import items
     app.register_blueprint(items)
 
-    from .shipment import shipment
-    app.register_blueprint(shipment)
+    from .shipment import shipments
+    app.register_blueprint(shipments)
 
     return app
 

@@ -2,11 +2,11 @@ from flask import Blueprint, abort, request, jsonify
 from .models import db, Inventory, Shipments, ShipmentItems
 from .util import view_shipment
 
-shipment = Blueprint('api/shipments', __name__, url_prefix='/api/shipments')
+shipments = Blueprint('api/shipments', __name__, url_prefix='/api/shipments')
 
 
-@shipment.route('/', methods=['GET'])
-@shipment.route('/<int:id>', methods=['GET'])
+@shipments.route('/', methods=['GET'])
+@shipments.route('/<int:id>', methods=['GET'])
 def read(id=''):
     if id:
         shipment = Shipments.query.get_or_404(id)
@@ -20,7 +20,7 @@ def read(id=''):
         return jsonify(result)
 
 
-@shipment.route('/', methods=['POST'])
+@shipments.route('/', methods=['POST'])
 def create():
     data = request.get_json()
     ship_desc = data.get('description')
@@ -33,7 +33,7 @@ def create():
     return jsonify(success=True)
 
 
-@shipment.route('/<int:id>/update', methods=['PUT'])
+@shipments.route('/<int:id>/update', methods=['PUT'])
 def update(id):
     data = request.get_json()
     ship_desc = data.get('description')
@@ -47,7 +47,7 @@ def update(id):
     return jsonify(success=True)
 
 
-@shipment.route('/<int:id>/delete', methods=['DELETE'])
+@shipments.route('/<int:id>/delete', methods=['DELETE'])
 def delete(id):
     shipment = Shipments.query.get_or_404(id)
     for ship_items in shipment.items:
@@ -58,7 +58,7 @@ def delete(id):
     return jsonify(success=True)
 
 
-@shipment.route('/<int:ship_id>/add', methods=['POST'])
+@shipments.route('/<int:ship_id>/add', methods=['POST'])
 def add(ship_id):
     data = request.get_json()
     try:
@@ -68,6 +68,7 @@ def add(ship_id):
             abort(400)
     except (ValueError, TypeError):
         abort(400)
+    shipment = Shipments.query.get_or_404(ship_id)
     item = Inventory.query.get_or_404(item_id)
     if item.quantity < item_quantity:
         abort(409)
@@ -83,7 +84,7 @@ def add(ship_id):
     return jsonify(success=True)
 
 
-@shipment.route('/<int:ship_id>/<int:item_id>/remove', methods=['DELETE'])
+@shipments.route('/<int:ship_id>/<int:item_id>/remove', methods=['DELETE'])
 def remove(ship_id, item_id):
     ship_item = ShipmentItems.query.filter_by(ship_id=ship_id, item_id=item_id).first()
     if ship_item:
